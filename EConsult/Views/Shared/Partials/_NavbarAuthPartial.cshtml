@@ -1,0 +1,20 @@
+﻿@inject IUserService userService
+
+@if (userService.IsCurrentUserAuthenticated())
+{
+    <li>
+        <a href="#">@userService.GetCurrentUserFullName()</a>
+    </li>
+    <li>
+        <a asp-controller="auth" asp-action="logout">Logout</a>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-controller="auth" asp-action="login">Login</a>
+    </li>
+    <li>
+        <a asp-controller="auth" asp-action="register">Register</a>
+    </li>
+}

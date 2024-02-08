@@ -1,0 +1,58 @@
+﻿@model RegisterViewModel
+
+<section class="section bg-gray-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 cell-inner">
+                <div class="section-lg">
+                    <h3 class="wow-outer"><span class="wow slideInDown">Register</span></h3>
+                    <!-- RD Mailform-->
+                    <form method="POST" asp-controller="Auth" asp-action="Register" class="rd-form rd-mailform">
+                        <div class="row row-10">
+                            <div class="col-md-6 wow-outer">
+                                <div class="form-wrap wow fadeSlideInUp">
+                                    <label class="form-label-outside">First Name</label>
+                                    <input asp-for="Name" class="form-input">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 wow-outer">
+                                <div class="form-wrap wow fadeSlideInUp">
+                                    <label class="form-label-outside">Last Name</label>
+                                    <input asp-for="LastName" class="form-input">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 wow-outer">
+                                <div class="form-wrap wow fadeSlideInUp">
+                                    <label class="form-label-outside">E-mail</label>
+                                    <input asp-for="Email" class="form-input">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 wow-outer">
+                                <div class="form-wrap wow fadeSlideInUp">
+                                    <label class="form-label-outside">Password</label>
+                                    <input asp-for="Password" class="form-input">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 wow-outer">
+                                <div class="form-wrap wow fadeSlideInUp">
+                                    <label class="form-label-outside">Confirm password</label>
+                                    <input asp-for="ConfirmPassword" class="form-input">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group group-middle">
+                            <div class="wow-outer">
+                                <button class="button button-primary button-winona wow slideInRight">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

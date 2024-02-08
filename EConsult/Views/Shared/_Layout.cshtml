@@ -1,0 +1,79 @@
+﻿@inject IUserService userService
+
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+<head>
+    <title>E-Consulting</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport"
+          content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="~/client/assets/images/favicon.ico" type="image/x-icon" asp-append-version="true"/>
+    <!-- Stylesheets-->
+    <link rel="stylesheet"
+          type="text/css"
+          href="//fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700" />
+    <link rel="stylesheet" href="~/client/assets/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/client/assets/css/fonts.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/client/assets/css/style.css" asp-append-version="true" />
+    <!-- Cusom CSS -->
+    @RenderSection("custom_styles", false)
+</head>
+<body>
+    <div class="page">
+        <partial name="Partials/_Navbar" />
+
+        @RenderBody();
+        <!-- Page Footer-->
+        <footer class="section footer-minimal bg-primary-darken">
+            <div class="container">
+                <div class="footer-minimal-inner">
+                    <a class="brand" asp-controller="Home" asp-action="Index">
+                        <img src="~/client/assets/images/logo-light-398x45.png"
+                             alt=""
+                             width="199"
+                             height="22"
+                             asp-append-version="true" />
+                    </a>
+                    <!-- Rights-->
+                    <p class="rights">
+                        <span>&copy;&nbsp;</span><span class="copyright-year"></span>. All
+                        Rights Reserved
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="preloader">
+        <div class="preloader-logo">
+            <img src="~/client/assets/images/logo-default-398x45.png"
+                 alt=""
+                 width="199"
+                 height="22" 
+                 asp-append-version="true" />
+        </div>
+        <div class="preloader-body">
+            <div id="loadingProgressG">
+                <div class="loadingProgressG" id="loadingProgressG_1"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="~/client/assets/js/core.min.js" asp-append-version="true"></script>
+    <script src="~/client/assets/js/script.js" asp-append-version="true"></script>
+    <!-- Plugins  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.11/signalr.min.js" integrity="sha512-BmbgtaebZ4BB5jiHMIauI5fFKc7dXo0Hqm7nmkHnoq63qBaYQWg1bhcNoaIBkfpw5bymrPEM8ap2fCB6ObSK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <script src="~/client/assets/common/js/online-user-tracker.js" asp-append-version="true"></script>
+        <script src="~/client/assets/client/assets/js/alert-message.js" asp-append-version="true"></script>
+    }
+
+    <!-- Custom  -->
+    @RenderSection("custom_scripts", false);
+</body>
+</html>
