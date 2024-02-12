@@ -1,0 +1,75 @@
+﻿@model ProductDetailsViewModel
+@using EConsult.Services.Abstracts
+@using EConsult.Contracts
+@inject IFileService fileService
+
+<section class="breadcrumbs-custom bg-image context-dark" style="background-image: url(client/assets/images/breadcrumbs-image-1.jpg);">
+    <div class="breadcrumbs-custom-inner">
+        <div class="container breadcrumbs-custom-container">
+            <div class="breadcrumbs-custom-main">
+                <h6 class="breadcrumbs-custom-subtitle title-decorated">Our Consultant</h6>
+                <h1 class="breadcrumbs-custom-title">Our Consultant</h1>
+            </div>
+            <ul class="breadcrumbs-custom-path">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">Our Consultant</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section section-md">
+    <div class="container">
+        <!-- Profile Modern-->
+        <article class="profile-modern">
+            <div class="profile-modern-figure">
+                <img class="profile-modern-image" src="@Model.ImageUrl" alt="" width="336" height="336" /><a href="@Url.Action("PlaceOrder", "Order", new { id = 1 })"><span class="icon mdi mdi-facebook-messenger"></span><span class="icon mdi mdi-facebook-messenger"></span></a>
+            </div>
+            <div class="profile-modern-main">
+                <div class="profile-modern-header">
+                    <div class="profile-modern-header-item">
+                        <h3>@Model.Name</h3>
+                        <p>@string.Join(", ", Model.Categories)</p>
+                    </div>
+                    <div class="profile-modern-item">
+                        <div class="group group-xs group-middle"><a class="icon icon-sm icon-creative mdi mdi-facebook" href="#"></a><a class="icon icon-sm icon-creative mdi mdi-twitter" href="#"></a><a class="icon icon-sm icon-creative mdi mdi-instagram" href="#"></a><a class="icon icon-sm icon-creative mdi mdi-google" href="#"></a><a class="icon icon-sm icon-creative mdi mdi-linkedin" href="#"></a></div>
+                    </div>
+                </div>
+                <div class="row row-30">
+                    <div class="col-lg-6">
+                        <p>@Model.Description</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Linear progress bar-->
+                        <article class="progress-linear">
+                            <div class="progress-header">
+                                <p>Consulting</p><span class="progress-value">90</span>
+                            </div>
+                            <div class="progress-bar-linear-wrap">
+                                <div class="progress-bar-linear"></div>
+                            </div>
+                        </article>
+                        <!-- Linear progress bar-->
+                        <article class="progress-linear">
+                            <div class="progress-header">
+                                <p>Analysis</p><span class="progress-value">65</span>
+                            </div>
+                            <div class="progress-bar-linear-wrap">
+                                <div class="progress-bar-linear"></div>
+                            </div>
+                        </article>
+                        <!-- Linear progress bar-->
+                        <article class="progress-linear">
+                            <div class="progress-header">
+                                <p>Research</p><span class="progress-value">100</span>
+                            </div>
+                            <div class="progress-bar-linear-wrap">
+                                <div class="progress-bar-linear"></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
