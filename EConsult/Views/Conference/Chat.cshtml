@@ -1,0 +1,32 @@
+﻿@section custom_styles {
+    <link rel="stylesheet" href="~/client/assets/css/video-chat.css" asp-append-version="true" />
+}
+
+<section class="section section-lg text-center">
+    <div class="container">
+        <div class="video-container">
+            <div video-grid class="video-grid"></div>
+        </div>
+
+        <div class="button-container">
+            <button id="screen-share-button" class="button fas fa-desktop"></button>
+            <button id="mute-button" class="button fas fa-microphone"></button>
+            <button id="pause-video-button" class="button fas fa-camera"></button>
+        </div>
+
+        <div id="chat" class="chat-container">
+            <div class="chat">
+                <ul id="messages" class="messages"></ul>
+                <div class="input-container">
+                    <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
+                    <button id="send-button" class="button send-button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section custom_scripts {
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="~/client/assets/js/chat.js" asp-append-version="true"></script>
+}
