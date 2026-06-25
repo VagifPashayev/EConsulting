@@ -2,6 +2,16 @@
 
 A full-stack e-consulting platform built with **ASP.NET Core 6 MVC**. The platform lets clients browse and purchase consulting services across multiple domains (IT, Business, Agro, Sport), manage orders, and communicate in real time with staff — all backed by a comprehensive admin panel.
 
+## Screenshots
+
+### Client application
+
+![EConsulting client application](docs/screenshots/home.png)
+
+### Product management
+
+![EConsulting product management](docs/screenshots/admin-products.png)
+
 ---
 
 ## Features
@@ -45,6 +55,43 @@ A full-stack e-consulting platform built with **ASP.NET Core 6 MVC**. The platfo
 | Email | SendGrid API / NETCore.MailKit |
 | Currency | Fixer.io REST API |
 | Frontend | Bootstrap 4, jQuery, ApexCharts |
+
+---
+
+## Architecture Highlights
+
+- MVC application split into client and admin areas
+- Service interfaces with dependency injection
+- Entity Framework Core configurations and migrations
+- Cookie authentication with role-based authorization
+- Four SignalR hubs for chat, alerts, staff presence, and online tracking
+- Auditable entities with automatic UTC timestamps
+- External SendGrid and Fixer.io integrations
+- Self-contained demo mode backed by EF Core InMemory
+
+---
+
+## Quick Demo
+
+The demo profile runs without SQL Server, SendGrid, or external API keys.
+
+```bash
+cd EConsult
+dotnet restore
+
+# PowerShell
+$env:ASPNETCORE_ENVIRONMENT = "Demo"
+dotnet run --no-launch-profile
+```
+
+Demo administrator:
+
+```text
+Email: admin@econsult.local
+Password: Demo123!
+```
+
+Open `/admin` after signing in to access the administration area.
 
 ---
 
