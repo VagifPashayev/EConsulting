@@ -26,14 +26,22 @@ public class Program
             .AddCookie(o =>
             {
                 o.Cookie.Name = "EConsultIdentity";
+                o.Cookie.HttpOnly = true;
+                o.Cookie.SameSite = SameSiteMode.Lax;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 o.LoginPath = "/auth/login";
+                o.AccessDeniedPath = "/auth/login";
             });
 
+        builder.Services.AddDbContext<EConsultDbContext>(options =>
+        {
+            if (builder.Configuration.GetValue<bool>("DemoMode"))
+                options.UseInMemoryDatabase("e-consulting-demo");
+            else
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+        });
+
         builder.Services
-            .AddDbContext<EConsultDbContext>(o =>
-            {
-                o.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-            })
             .AddScoped<IUserService, UserService>()
             .AddSingleton<IFileService, ServerFileService>()
             .AddScoped<IEmailService, EmailService>()
@@ -52,17 +60,30 @@ public class Program
 
         var app = builder.Build();
 
+        if (!app.Environment.IsDevelopment())
+            app.UseHsts();
+
+        app.UseHttpsRedirection();
         app.UseStaticFiles();
 
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+        app.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.MapHub<AlertMessageHub>("/alert-hub"); 
         app.MapHub<OnlineUserHub>("/online-user-hub"); 
         app.MapHub<StaffUsersViewHub>("/staff-users-view-hub"); 
         app.MapHub<ChatHub>("/conference-hub"); 
+
+        if (app.Configuration.GetValue<bool>("DemoMode"))
+            DemoDataSeeder.Seed(app.Services);
 
         app.Run();
     }
