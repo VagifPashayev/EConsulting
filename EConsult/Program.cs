@@ -69,7 +69,13 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+        app.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.MapHub<AlertMessageHub>("/alert-hub"); 
         app.MapHub<OnlineUserHub>("/online-user-hub"); 
