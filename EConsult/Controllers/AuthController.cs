@@ -10,7 +10,6 @@ using EConsult.Services.Abstracts;
 using EConsult.Services.Concretes;
 using EConsult.ViewModels;
 using System.Security.Claims;
-using static System.Net.WebRequestMethods;
 
 namespace EConsult.Controllers;
 
@@ -39,7 +38,7 @@ public class AuthController : Controller
     #region Login
 
     [HttpGet("login")]
-    public async Task<IActionResult> Login()
+    public IActionResult Login()
     {
         if (_userService.IsCurrentUserAuthenticated())
         {

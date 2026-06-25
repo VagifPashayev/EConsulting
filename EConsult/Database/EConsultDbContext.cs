@@ -13,28 +13,33 @@ public class EConsultDbContext : DbContext
 
     public override int SaveChanges()
     {
-        foreach (var entry in ChangeTracker.Entries())
-        {
-            if (entry.Entity is not IAuditable)
-                continue;
-
-            IAuditable auditable = (IAuditable)entry.Entity;
-
-            if (entry.State == EntityState.Added)
-            {
-                auditable.CreatedAt = DateTime.UtcNow;
-                auditable.UpdatedAt = DateTime.UtcNow;
-            }
-            else if (entry.State == EntityState.Modified)
-            {
-                auditable.UpdatedAt = DateTime.UtcNow;
-            }
-        }
-
-
+        SetAuditFields();
         return base.SaveChanges();
     }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        SetAuditFields();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void SetAuditFields()
+    {
+        var now = DateTime.UtcNow;
+
+        foreach (var entry in ChangeTracker.Entries<IAuditable>())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedAt = now;
+                entry.Entity.UpdatedAt = now;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                entry.Entity.UpdatedAt = now;
+            }
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
